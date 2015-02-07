@@ -9,11 +9,11 @@ require 'sqlite3'
 
 DATABASE = SQLite3::Database.new('warehousemanager.db')
 
-# Here, we c
+# Here, we load category, location and product files so we don't need to in 
+# every file
 
 require_relative "category"
 require_relative "location"
 require_relative "product"
-
 
 binding.pry

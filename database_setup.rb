@@ -1,3 +1,5 @@
+
+
 DATABASE.results_as_hash = true
 
 DATABASE.execute("CREATE TABLE IF NOT EXISTS locations 
@@ -11,10 +13,10 @@ DATABASE.execute("CREATE TABLE IF NOT EXISTS categories
 DATABASE.execute("CREATE TABLE IF NOT EXISTS products 
                   (id INTEGER PRIMARY KEY,
                   name TEXT, 
-                  FOREIGN KEY(location_id) REFERENCES locations(id) INTEGER,
-                  FOREIGN KEY(category_id) REFERENCES categories(id) INTEGER,
+                  location_id INTEGER,
+                  category_id INTEGER,
                   description TEXT, 
                   cost INTEGER,
                   serial TEXT,
-                  quantity INTEGER,
+                  quantity INTEGER
                   )")
