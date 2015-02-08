@@ -1,5 +1,5 @@
 class Product
-  attr_reader :id
+  attr_reader   :id
   attr_accessor :name, :location_id, :category_id, :description, 
                 :cost, :serial, :quantity
 
@@ -89,6 +89,67 @@ class Product
     return results[0]
   end
   
+  #assign_product_location is used to move products to different locations
+  def self.assign_product_location(existing_product_key, desired_location_id)
+    x = existing_product_key
+    y = desired_location_id
+    # consider using part or all of the code below for the cli menu conditionals
+    # location_catcher = []
+    # new_fetch = Product.fetch_product_record(x)
+    # location_catcher = new_fetch[0]
+    # puts location_catcher
+    
+    DATABASE.execute("UPDATE products SET location_id = #{y} 
+                      WHERE id = #{x}")
+  end
+  
+  def self.assign_product_category(existing_product_key, desired_category_id)
+    x = existing_product_key
+    y = desired_category_id
+    
+    DATABASE.execute("UPDATE products SET category_id = #{y} 
+                      WHERE id = #{x}")
+  end
+  
+  def self.update_product_quantity(existing_product_key, desired_quantity)
+    x = existing_product_key
+    y = desired_quantity
+    
+    DATABASE.execute("UPDATE products SET quantity = #{y} 
+                      WHERE id = #{x}")
+  end
+  
+  def self.where_products_in_category(category_id)
+    results = DATABASE.execute("SELECT * FROM products WHERE category_id = 
+                                 #{category_id}")
+                                 
+    #create an empty array to pass in each separate hash:
+    # results_changed_to_objects = []
+    # results_changed_to_objects = results
+
+    # results.each do |database_hashes|
+    # results_changed_to_objects << self.new(database_hashes)
+    #
+    # end
+    # results_changed_to_objects
+    results
+  end
+  
+  def self.where_products_in_location(location_id)
+    results = DATABASE.execute("SELECT * FROM products WHERE location_id = 
+                                 #{location_id}")
+                                 
+    #create an empty array to pass in each separate hash:
+    # results_changed_to_objects = []
+    # results_changed_to_objects = results
+
+    # results.each do |database_hashes|
+    # results_changed_to_objects << self.new(database_hashes)
+    #
+    # end
+    # results_changed_to_objects
+    results
+  end
   # def self.find(number)
   #   results = DATABASE.execute("SELECT * FROM products WHERE id =
   #                               #{number}")
