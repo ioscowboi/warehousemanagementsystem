@@ -19,8 +19,9 @@ require_relative "interface"
 
 
 
-x = "n"
-until x == "y"  
+x = "y"
+until x == "n"  
+  
 answer = main_menu
 case answer
 when 1
@@ -48,7 +49,7 @@ when 1
   dashes
   puts "#{name} record added to the database!"
   dashes
-# answer = main_menu
+
 # when 2
 #   dashes
 #   puts "Ok, you want to update a current product, correct?"
@@ -78,17 +79,20 @@ when 1
 #   dashes
 
 
-
+when 2
+  puts "do nothing!"
 end
 
-puts "Ready exit? "
+puts "Keep working? "
 puts "Enter 'y' for yes, 'n' for no:"
 x = gets.chomp
 
-until x == "y" || x == "n"
-  puts "Please enter y or n:"
-  x = gets.chomp
+if x == "no"
+  x = "n"
+else
+  x = "y"
 end
+
 # case answer == 2
 #   puts "case 2"
 # end
@@ -133,4 +137,5 @@ end
 # case answer == 15
 # end
 end
+
 binding.pry
