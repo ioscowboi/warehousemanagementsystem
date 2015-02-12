@@ -29,7 +29,6 @@ end
 
 
 get "/page2" do
-  logger.info params
   @location = "#{params["option_1"]}"
   @category = "#{params["option_1"]}"
   @product = "#{params["option_1"]}"
@@ -37,10 +36,23 @@ get "/page2" do
 end
 
 get "/page3" do
-  logger.info params
   @location = "#{params["option_2_locations"]}"
   @category = "#{params["option_2_categories"]}"
   @product = "#{params["option_2_products"]}"
+    erb :page3, :layout => :template
+end
+
+get "/page4/add_location" do
+  @new_name = "#{params["name_entered"]}"
+  @add_it = Location.new({"location_name" => "#{@new_name}"})
+  @add_it.insert
+  erb :add_location, :layout => :template
+end
+
+get "/page4/update_location" do
+  @location = "#{params["update_locations"]}"
+  @category = "#{params["option_3_categories"]}"
+  @product = "#{params["option_3_products"]}"
     erb :page3, :layout => :template
 end
 # x = "y"
