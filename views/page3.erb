@@ -1,0 +1,282 @@
+
+<!--Interface to add a new location in the database -->
+<% if @location == "Add" %>
+
+<p>
+  Add a location:
+  <form action="/page4">
+
+  </br>
+  Location Name: 
+  </br>  
+  <input type="text" name="add_this_name" size="70" maxlength="55">
+  </br>
+</br>
+  <input class="updatebutton" type="submit" value="Submit">
+</form>
+</p> 
+<% end %>
+
+<!--Interface to update a current location with a new location name -->
+<% if @location == "Update" %>
+<div id="left">
+<p>
+  Update a location:
+  <form action="/page4">
+
+  </br>
+  Current Location:
+  </br>
+<select name="option_3_locations" width="70">
+    <option> - Select Location - </option>
+ <% Location.all.each do |each_location| %>
+    <option value="<%= each_location.id %>"><%= each_location.location_name %>
+    </option>
+    <% end %>
+  </select>
+ </br>
+</br>
+  New Location Name:
+  </br>
+  <input type="text" name="desired_new" size="70" maxlength="55">
+</br>
+</br>
+  <input class="updatebutton" type="submit" value="Update">
+
+</form>
+</p>
+</div>
+<% end %>
+
+<!--Interface to delete an existing location from the database. -->
+<% if @location == "Delete" %>
+
+<p>
+  Delete a location:
+  <form action="/page4">
+  </br>  
+<select name="option_3_locations" width="70">
+    <option> - Select Location - </option>
+ <% Location.all.each do |each_location| %>
+    <option value="<%= each_location.id %>"><%= each_location.location_name %>
+    </option>
+    <% end %>
+  </select>
+   </br>
+  </br>
+
+    </br>  
+
+    </br>
+    </br>
+  <input class="deletebutton" type="submit" value="Delete">
+</form>
+</p> 
+<% end %>
+
+<!--Interface to create a new category in the database -->
+<% if @category == "Add" %>
+
+<p>
+  Add a category:
+  <form action="/page4">
+
+  </br>
+  Category Name: 
+  </br>  
+  <input type="text" name="add_this_name" size="70" maxlength="55">
+  </br>
+  </br>
+
+  <input class="updatebutton" type="submit" value="Submit">
+</form>
+</p> 
+<% end %>
+
+<!--Interface to update a current location with a new location name -->
+<% if @category == "Update" %>
+
+<div id="left">
+<p>
+  Update a category:
+  <form action="/page4">
+
+  </br>
+  Current Category:
+  </br>
+<select name="option_3_categories" width="70">
+    <option> - Select Category - </option>
+ <% Category.all.each do |each_category| %>
+    <option value="<%= each_category.id %>"><%= each_category.manufacturer %>
+    </option>
+    <% end %>
+  </select>
+ </br>
+</br>
+  New Category Name:
+  </br>
+  <input type="text" name="desired_new" size="70" maxlength="55">
+</br>
+</br>
+  <input class="updatebutton" type="submit" value="Update">
+
+</form>
+</p>
+</div>
+<% end %>
+
+<!--Interface to delete an existing category from the database -->
+
+<% if @category == "Delete" %>
+
+<p>
+  Delete a category:
+  <form action="/page4">
+
+  </br>
+  Current Category:
+  </br>
+<select name="option_3_categories" width="70">
+    <option> - Select Category - </option>
+ <% Category.all.each do |each_category| %>
+    <option value="<%= each_category.id %>"><%= each_category.manufacturer %>
+    </option>
+    <% end %>
+  </select>
+ </br>
+</br>
+
+  </br>  
+
+  </br>
+  </br>
+
+
+  <input class="deletebutton" type="submit" value="Delete">
+</form>
+</p> 
+<% end %>
+
+<!--Interface to add a new product to the database -->
+<% if @product == "Add" %>
+
+<p>
+  Add a Product:
+  <form action="/page4">
+
+  </br>
+  Product Name: 
+  </br>  
+  <input type="text" name="add_this_name" size="70" maxlength="55">
+  </br>
+</br>
+  <input class="updatebutton" type="submit" value="Submit">
+</form>
+</p> 
+<% end %>
+
+<!--Interface to update an existing product in the database -->
+<% if @product == "Update" %>
+
+<div id="left">
+<p>
+  Update a Product:
+  <form action="/page4">
+
+  </br>
+  Current Product:
+  </br>
+<select name="option_3_products" width="70">
+    <option> - Select Category - </option>
+ <% Product.all.each do |each_product| %>
+    <option value="<%= each_product.id %>"><%= each_product.name %>
+    </option>
+    <% end %>
+  </select>
+ </br>
+</br>
+  New Product Name:
+  </br>
+  <input type="text" name="desired_new" size="70" maxlength="55">
+</br>
+</br>
+  <input class="updatebutton" type="submit" value="Update">
+
+</form>
+</p>
+</div>
+<% end %>
+
+<!--Interface to delete an existing product from the database -->
+<% if @product == "Delete" %>
+
+<p>
+  Delete a Product:
+  <form action="/page4">
+
+  </br>
+  Current Product:
+  </br>
+<select name="option_3_products" width="70">
+    <option> - Select Category - </option>
+ <% Product.all.each do |each_product| %>
+    <option value="<%= each_product.id %>"><%= each_product.name %>
+    </option>
+    <% end %>
+  </select>
+ </br>
+</br>
+
+  </br>  
+
+  </br>
+  </br>
+
+
+  <input class="deletebutton" type="submit" value="Delete">
+</form>
+</p> 
+<% end %>
+
+<!--Interface to move an existing product to a new location in the database. -->
+<!--The form is sent to page4, the first select tag finds and presents the   -->
+<!--name of all products in the database. -->
+<!--The second select finds and presents all available database locations -->
+<% if @product == "Move" %>
+
+<p>
+  Move a Product:
+  <form action="/page4">
+
+  </br>
+  Current Product:
+  </br>
+<select name="option_3_products" width="70">
+    <option> - Select Category - </option>
+ <% Product.all.each do |each_product| %>
+    <option value="<%= each_product.id %>"><%= each_product.name %>
+    </option>
+    <% end %>
+  </select>
+ </br>
+</br>
+ Move To: 
+</br>
+<select name="option_3_products" width="70">
+    <option> - Select Location - </option>
+ <% Location.all.each do |each_location| %>
+    <option value="<%= each_location.id %>"><%= each_location.location_name %>
+    </option>
+    <% end %>
+  </select>
+
+  </br>  
+
+  </br>
+  </br>
+
+
+  <input class="deletebutton" type="submit" value="MOVE">
+</form>
+</p> 
+<% end %>

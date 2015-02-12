@@ -1,0 +1,74 @@
+
+
+<% if @location =="Location" %>
+
+<p>
+      Please select an option below:
+      <form action="/page3">
+
+    </br>
+
+                  <select name="option_2_locations">
+                    <option> - Location Info - </option>
+                    <option value="Add">Add location</option>
+                    <option value="Update">Update location</option>
+                    <option value="Delete">Delete location</option>
+                  </select>
+
+                  </br>
+                </br>
+
+
+                <input class="updatebutton" type="submit" value="Enter">
+                </form>
+</p> 
+<% end %>
+
+<% if @category == "Category" %>
+<p>
+      Please select an option below:
+      <form action="/page3">
+
+    </br>
+
+                  <select name="option_2_categories">
+                    <option> - Category Info - </option>
+                    <option value="Add">Add category</option>
+                    <option value="Update">Update category</option>
+                    <option value="Delete">Delete category</option>
+                  </select>
+
+                  </br>
+                </br>
+
+
+                <input class="updatebutton" type="submit" value="Enter">
+                </form>
+</p> 
+<% end %>
+
+<% if @product == "Product" %>
+
+                    <p>
+                      Please select an option below:
+                      <form action="/page3">
+
+
+                  <select name="option_2_products">
+                    <option> - Product Info - </option>
+                    <option value="Add">Add product</option>
+                    <option value="Update">Update product</option>
+                    <option value="Delete">Delete product</option>
+                    <option value="Move">Move product</option>
+                  </select>
+
+  </br>
+</br>
+
+
+<input class="updatebutton" type="submit" value="Enter">
+</form>
+</p>
+
+ <% end %> 
+
