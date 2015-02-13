@@ -47,6 +47,7 @@ class Category
   #
   # State Changes:
   # Saves new value in 'categories' table in the database.
+  
   def save
     get_category = []
 
@@ -70,6 +71,42 @@ class Category
     var = category_grabber.join(", ")
     
     DATABASE.execute("UPDATE categories SET #{var} WHERE id = #{id}")
+  end
+  
+  # Public: #overwrite
+  # changes the row values of an existing column (SELECT parameters:@name)
+  #
+  # Attributes:
+  # manufacturer    - see options hash 
+  # id              - see options hash
+  #
+  # Returns:
+  # an empty array
+  #
+  # State Changes:
+  # Sets database values to new info based on user input
+  # database fields affected: manufacturer
+  
+  def overwrite
+    DATABASE.execute("UPDATE categories SET manufacturer = '#{manufacturer}' WHERE id = #{id}")
+  end
+  
+  # Public: #remove
+  # Removes a row from the products table based on the selected id value
+  #
+  # Attributes: 
+  # id          - see options hash
+  #
+  # Returns:
+  # an empty array
+  #
+  # State Changes:
+  # Sets database values to new info based on user input
+  # database fields affected: 1 row
+  
+  def remove
+
+    DATABASE.execute("DELETE FROM categories WHERE id = '#{id}'")
   end
   
   # Public: #delete
@@ -110,6 +147,17 @@ class Category
     DATABASE.execute("DELETE FROM categories WHERE manufacturer = '#{manufacturer}'")
   end
   
+  # Public: .all
+  # Class method that returns all records in the table
+  #
+  # Parameters:
+  # None.
+  #
+  # Returns:
+  # All table records as objects.
+  #
+  # State Changes:
+  # None.  
   def self.all
     
     results = DATABASE.execute("SELECT * FROM categories")

@@ -72,6 +72,25 @@ class Location
     DATABASE.execute("UPDATE locations SET #{var} WHERE id = #{id}")
   end
   
+  # Public: #overwrite
+  # changes the row values of an existing column (SELECT parameters:@name)
+  #
+  # Attributes:
+  # location_name        - see options hash 
+  # id          - see options hash
+  #
+  # Returns:
+  # an empty array
+  #
+  # State Changes:
+  # Sets database values to new info based on user input
+  # database fields affected: location_name
+  
+  def overwrite
+    DATABASE.execute("UPDATE locations SET location_name = '#{location_name}' WHERE id = #{id}")
+  end
+  
+  
   # Public: #delete
   # Returns the current values in the database as an array and deletes the 
   # location record.
@@ -110,6 +129,23 @@ class Location
     DATABASE.execute("DELETE FROM locations WHERE location_name = '#{location_name}'")
   end
   
+  # Public: #remove
+  # Removes a column from the products table based on the selected id value
+  #
+  # Attributes: 
+  # id          - see options hash
+  #
+  # Returns:
+  # an empty array
+  #
+  # State Changes:
+  # Sets database values to new info based on user input
+  # database fields affected: 1 row
+  
+  def remove
+
+    DATABASE.execute("DELETE FROM locations WHERE id = '#{id}'")
+  end
   # Class method self.all retrieves its hash from the database and is stored in
    # results
  # results is then looped through and the self object is passed into

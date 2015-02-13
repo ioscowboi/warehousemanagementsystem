@@ -17,12 +17,13 @@
 <html>
 <head>
 <title>WAREHOUSE MANAGEMENT ONLINE</title>
-<link rel="stylesheet" href='css/template.css'>
+<link rel="stylesheet" href='/css/template.css'>
 
 <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
 
 
 <script type="text/javascript" src ="birthdate.js"></script>
+
 </head>
 
 
@@ -30,27 +31,50 @@
   
   <div>
     <ul>
-      <li><a href="/page1"> << main page</a></li>
+      <li><a href="/page1">WAREHOUSE MANAGEMENT ONLINE</a></li>
 
     </ul>
   </div>
   <h1>Welcome to W.M.O.</h1>
     <a href=""><img src="http://upload.wikimedia.org/wikipedia/commons/c/cf/X2_warehouse.jpg"></a>
 
-  <h5><strong>warehouse management online</strong></h5>
+  <h5><strong>reliable. affordable. iso 4000</strong></h5>
   <h6><strong>since 2015</strong></h6>
   <div>
   
 <%= yield %>
 </div>
-<input type="button" value="Go Back" onclick="goBack()" />
+<input class ="navbutton" type="submit" value="<< Previous" onclick="goBack()" />
+<input class ="navbutton" type="submit" value="Home Page" onclick="goHome()" />
+</br>
+</br>
 </body>
 
 <script type="text/javascript">date_populate("date", "month", "year");</script>
 <script type="text/javascript">
-function goBack () {
-history.go(-1);
-return false;
-}
+  function goBack () {
+      history.go(-1);
+      return false;
+  }
 </script>
+  
+<script type="text/javascript">
+  function goHome () {
+    window.location = '/page1'; 
+    return false;
+  }
+</script>
+
+<script>
+  function myFunction() {
+      if (confirm("ARE YOU SURE? THIS WILL PERMANENTLY DELETE THE RECORD!") == true) {
+         
+      } else {
+        
+      }
+
+  }
+</script>
+
+  
 </html>

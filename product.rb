@@ -1,3 +1,35 @@
+# Class: Dog
+#
+# Creates an instance of access to the warehousemanager.db > products database
+# table
+#
+# Public Methods:
+# #insert     -adds a new row to the products table (SELECT parameters: see
+#              options hash)
+# #save       -adds new info to an existing row in the products table
+#              (SELECT parameters: see options hash)
+# #move_it    -changes existing column values to an existing row in the
+#              products table (SELECT parameters: @location, @category, @id)
+# #overwrite  -revises the name of an existing column (SELECT parameters:@name,
+#              @id)
+# #delete     -removes the row of an existing column (SELECT parameters:@name)
+#
+# Initialized Attributes:
+# options - Hash
+#           -@name         - populates the name column in the products database
+#           -@id           - populates the id column in the products database
+#           -@location_id  - populates the location_id column in the products                            database
+#           -@category_id  - populates the category_id column in the products                            database
+#           -@description  - populates the description column in the products                            database
+#           -@cost         - populates the cost column in the products database
+#           -@serial       - populates the serial column in the products                                 database
+#           -@quantity     - populates the quantity column in the products                               database
+#
+# State Changes:
+# Sets options hash values based on user input. Updates values in the products
+# database table
+# **see method documentation for more details
+
 class Product
   attr_reader   :id
   attr_accessor :name, :location_id, :category_id, :description, 
@@ -18,6 +50,26 @@ class Product
   #the argument will come in as [name, location_id, category_id,
   #description, cost, serial, quantity]
   
+  # Public: #insert
+  # adds a new table row to the products table
+  # Attributes:
+  # @name         - see options hash
+  # @id           - see options hash
+  # @location_id  - see options hash
+  # @category_id  - see options hash
+  # @description  - see options hash
+  # @cost         - see options hash
+  # @serial       - see options hash
+  # @quantity     - see options hash
+  #
+  # Returns:
+  # an empty array
+  #
+  # State Changes:
+  # Sets database values to new info based on user input
+  # database fields affected: location_id, category_id, description, cost,
+  #                           serial, and quantity
+  
   def insert
     
     
@@ -29,6 +81,25 @@ class Product
   end
   
   # save method finds the existing value for a row and "updates" it.
+  # Public: #save
+  # updates an existing table row in the products table
+  # Attributes:
+  # @name         - see options hash (note: obtained via "instance_variables")
+  # @id           - see options hash (note: obtained via "instance_variables")
+  # @location_id  - see options hash (note: obtained via "instance_variables")
+  # @category_id  - see options hash (note: obtained via "instance_variables")
+  # @description  - see options hash (note: obtained via "instance_variables")
+  # @cost         - see options hash (note: obtained via "instance_variables")
+  # @serial       - see options hash (note: obtained via "instance_variables")
+  # @quantity     - see options hash (note: obtained via "instance_variables")
+  #
+  # Returns:
+  # an empty array
+  #
+  # State Changes:
+  # Sets database values to new info based on user input
+  # database fields affected: location_id, category_id, description, cost,
+  #                           serial, and quantity
   def save
     get_product = []
 
@@ -53,7 +124,65 @@ class Product
     
     DATABASE.execute("UPDATE products SET #{var} WHERE id = #{id}")
   end
+
+  # Public: #move_it
+  # changes the row values of an existing column (SELECT parameters:@name)
+  #
+  # Attributes:
+  # category_id - see options hash 
+  # location_id - see options hash
+  # id          - see options hash
+  #
+  # Returns:
+  # an empty array
+  #
+  # State Changes:
+  # Sets database values to new info based on user input
+  # database fields affected: location_id, category_id
   
+  def move_it
+
+    DATABASE.execute("UPDATE products SET category_id = #{category_id}, 
+                      location_id = #{location_id} WHERE id = #{id}")
+  end
+  
+  # Public: #overwrite
+  # changes the row values of an existing column (SELECT parameters:@name)
+  #
+  # Attributes:
+  # name        - see options hash 
+  # id          - see options hash
+  #
+  # Returns:
+  # an empty array
+  #
+  # State Changes:
+  # Sets database values to new info based on user input
+  # database fields affected: name
+  
+  def overwrite
+    DATABASE.execute("UPDATE products SET name = '#{name}' WHERE id = #{id}")
+  end
+  
+  # Public: #delete
+  # removes the row of an existing column (SELECT parameters:@name)
+  #
+  # Parameters:
+  # x         - local variable to loop through instance_variables
+  # y         - local variable to loop through get_product[]
+  #local_var  - local variable to separate variables from strings in the
+  #             "get_product.each" loop
+
+  #           how you would type a very long description of a parameter.
+  #
+  # Returns:
+  # an empty array
+  #
+  # State Changes:
+  # Sets database values to new info based on user input
+  # the loop turns the @ttributes into a string to pass into SQLite3 
+  # *****NOTE: the above functionality is not currently in use. See the "remove"
+  # method for current deletion method on the website
   def delete
     get_product = []
 
@@ -79,6 +208,20 @@ class Product
     DATABASE.execute("DELETE FROM products WHERE name = '#{name}'")
   end
   
+  # Public: #fetch_product_record
+  # finds all rows with an existing id number
+  #
+  # Parameters:
+  # number    - local variable to loop through instance_variables
+  #
+  # Argument: 
+  # id number provided by user
+  #
+  # Returns:
+  # an array containing the matching id number
+  #
+  # State Changes:
+  # none
   
   def self.fetch_product_record(number)
     results = DATABASE.execute("SELECT * FROM products WHERE id = 
@@ -177,4 +320,22 @@ class Product
     
     results_as_objects
   end
+
+  # Public: #remove
+  # Removes a column from the products table based on the selected id value
+  #
+  # Attributes: 
+  # id          - see options hash
+  #
+  # Returns:
+  # an empty array
+  #
+  # State Changes:
+  # Sets database values to new info based on user input
+  # database fields affected: 1 row
+  def remove
+
+    DATABASE.execute("DELETE FROM products WHERE id = '#{id}'")
+  end
+  
 end

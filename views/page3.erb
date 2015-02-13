@@ -3,13 +3,22 @@
 <% if @location == "Add" %>
 
 <p>
-  Add a location:
-  <form action="/page4">
-
+  Does The Location Exist?
+  <form action="/page4/add_location">
+   to prevent duplicate data, search the dropdown menu below before submitting:
+  </br>
+<select name="target_id" width="70">
+    <option> - Select Location - </option>
+ <% Location.all.each do |each_location| %>
+    <option value="<%= each_location.id %>"><%= each_location.location_name %>
+    </option>
+    <% end %>
+  </select>
+ </br>
   </br>
   Location Name: 
   </br>  
-  <input type="text" name="add_this_name" size="70" maxlength="55">
+  <input type="text" name="name_entered" size="70" maxlength="55">
   </br>
 </br>
   <input class="updatebutton" type="submit" value="Submit">
@@ -22,12 +31,12 @@
 <div id="left">
 <p>
   Update a location:
-  <form action="/page4">
+  <form action="/page4/update_location">
 
   </br>
   Current Location:
   </br>
-<select name="option_3_locations" width="70">
+<select name="target_id" width="70">
     <option> - Select Location - </option>
  <% Location.all.each do |each_location| %>
     <option value="<%= each_location.id %>"><%= each_location.location_name %>
@@ -38,7 +47,7 @@
 </br>
   New Location Name:
   </br>
-  <input type="text" name="desired_new" size="70" maxlength="55">
+  <input type="text" name="updated_name" size="70" maxlength="55">
 </br>
 </br>
   <input class="updatebutton" type="submit" value="Update">
@@ -53,9 +62,9 @@
 
 <p>
   Delete a location:
-  <form action="/page4">
+  <form action="/page4/delete_location">
   </br>  
-<select name="option_3_locations" width="70">
+<select name="delete_id" width="70">
     <option> - Select Location - </option>
  <% Location.all.each do |each_location| %>
     <option value="<%= each_location.id %>"><%= each_location.location_name %>
@@ -69,9 +78,11 @@
 
     </br>
     </br>
-  <input class="deletebutton" type="submit" value="Delete">
+  <input onclick="myFunction()" class="deletebutton" type="submit" value="Delete">
+  
 </form>
 </p> 
+
 <% end %>
 
 <!--Interface to create a new category in the database -->
@@ -79,12 +90,12 @@
 
 <p>
   Add a category:
-  <form action="/page4">
+  <form action="/page4/add_category">
 
   </br>
   Category Name: 
   </br>  
-  <input type="text" name="add_this_name" size="70" maxlength="55">
+  <input type="text" name="name_entered" size="70" maxlength="55">
   </br>
   </br>
 
@@ -99,12 +110,12 @@
 <div id="left">
 <p>
   Update a category:
-  <form action="/page4">
+  <form action="/page4/update_category">
 
   </br>
   Current Category:
   </br>
-<select name="option_3_categories" width="70">
+<select name="target_id" width="70">
     <option> - Select Category - </option>
  <% Category.all.each do |each_category| %>
     <option value="<%= each_category.id %>"><%= each_category.manufacturer %>
@@ -115,7 +126,7 @@
 </br>
   New Category Name:
   </br>
-  <input type="text" name="desired_new" size="70" maxlength="55">
+  <input type="text" name="updated_name" size="70" maxlength="55">
 </br>
 </br>
   <input class="updatebutton" type="submit" value="Update">
@@ -131,12 +142,12 @@
 
 <p>
   Delete a category:
-  <form action="/page4">
+  <form action="/page4/delete_category">
 
   </br>
   Current Category:
   </br>
-<select name="option_3_categories" width="70">
+<select name="delete_id" width="70">
     <option> - Select Category - </option>
  <% Category.all.each do |each_category| %>
     <option value="<%= each_category.id %>"><%= each_category.manufacturer %>
@@ -159,16 +170,48 @@
 
 <!--Interface to add a new product to the database -->
 <% if @product == "Add" %>
-
 <p>
-  Add a Product:
-  <form action="/page4">
+  Add a Product
+  <form action="/page4/add_product">
+  <h2>Product Name: </h2>
 
+  <input type="text" name="name_entered" size="70" maxlength="55">
   </br>
-  Product Name: 
-  </br>  
-  <input type="text" name="add_this_name" size="70" maxlength="55">
+  <h2>Location: </h2> 
+<select name="location_id" width="70">
+    <option> - Select Location - </option>
+ <% Location.all.each do |each_location| %>
+    <option value="<%= each_location.id %>"><%= each_location.location_name %>
+    </option>
+    <% end %>
+  </select>
   </br>
+    <h2>Category:</h2> 
+<select name="category_id" width="70">
+    <option> - Select Category - </option>
+ <% Category.all.each do |each_category| %>
+    <option value="<%= each_category.id %>"><%= each_category.manufacturer %>
+    </option>
+    <% end %>
+  </select>
+
+    <h2>Description: </h2>
+
+    <input type="text" name="description" size="70" maxlength="55">
+
+    <h2>Cost (in whole dollars): </h2>
+
+    <input type="text" name="cost" size="70" maxlength="55">
+ 
+    <h2>Serial # </h2>
+
+    <input type="text" name="serial" size="70" maxlength="55">
+
+    <h2>Quantity(no commas): </h2>
+
+    <input type="text" name="quantity" size="70" maxlength="10">
+    </br>
+  
 </br>
   <input class="updatebutton" type="submit" value="Submit">
 </form>
@@ -181,12 +224,12 @@
 <div id="left">
 <p>
   Update a Product:
-  <form action="/page4">
+  <form action="/page4/update_product">
 
   </br>
   Current Product:
   </br>
-<select name="option_3_products" width="70">
+<select name="target_id" width="70">
     <option> - Select Category - </option>
  <% Product.all.each do |each_product| %>
     <option value="<%= each_product.id %>"><%= each_product.name %>
@@ -197,7 +240,7 @@
 </br>
   New Product Name:
   </br>
-  <input type="text" name="desired_new" size="70" maxlength="55">
+  <input type="text" name="updated_name" size="70" maxlength="55">
 </br>
 </br>
   <input class="updatebutton" type="submit" value="Update">
@@ -212,12 +255,12 @@
 
 <p>
   Delete a Product:
-  <form action="/page4">
+  <form action="/page4/delete_product">
 
   </br>
   Current Product:
   </br>
-<select name="option_3_products" width="70">
+<select name="delete_id" width="70">
     <option> - Select Category - </option>
  <% Product.all.each do |each_product| %>
     <option value="<%= each_product.id %>"><%= each_product.name %>
@@ -242,17 +285,18 @@
 <!--The form is sent to page4, the first select tag finds and presents the   -->
 <!--name of all products in the database. -->
 <!--The second select finds and presents all available database locations -->
+
 <% if @product == "Move" %>
 
 <p>
   Move a Product:
-  <form action="/page4">
+  <form action="/page4/move_product">
 
   </br>
   Current Product:
-  </br>
-<select name="option_3_products" width="70">
-    <option> - Select Category - </option>
+</br>
+<select name="move_id" width="70">
+    <option> - Select Product - </option>
  <% Product.all.each do |each_product| %>
     <option value="<%= each_product.id %>"><%= each_product.name %>
     </option>
@@ -260,18 +304,26 @@
   </select>
  </br>
 </br>
- Move To: 
+ Choose A Location: 
 </br>
-<select name="option_3_products" width="70">
+<select name="location_id" width="70">
     <option> - Select Location - </option>
  <% Location.all.each do |each_location| %>
     <option value="<%= each_location.id %>"><%= each_location.location_name %>
     </option>
     <% end %>
   </select>
-
-  </br>  
-
+</br>
+</br>
+  Choose A Category:
+</br>
+<select name="category_id" width="70">
+    <option> - Select Category - </option>
+ <% Category.all.each do |each_category| %>
+    <option value="<%= each_category.id %>"><%= each_category.manufacturer %>
+    </option>
+    <% end %>
+  </select>
   </br>
   </br>
 
