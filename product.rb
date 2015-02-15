@@ -141,7 +141,6 @@ class Product
   # database fields affected: location_id, category_id
   
   def move_it
-
     DATABASE.execute("UPDATE products SET category_id = #{category_id}, 
                       location_id = #{location_id} WHERE id = #{id}")
   end

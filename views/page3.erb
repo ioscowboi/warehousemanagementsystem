@@ -5,23 +5,31 @@
 <p>
   Does The Location Exist?
   <form action="/page4/add_location">
-   to prevent duplicate data, search the dropdown menu below before submitting:
+    to prevent duplicate data, search the dropdown menu below before submitting:
+  
   </br>
-<select name="target_id" width="70">
+  <select name="target_id" width="70">
     <option> - Select Location - </option>
- <% Location.all.each do |each_location| %>
+    <% Location.all.each do |each_location| %>
     <option value="<%= each_location.id %>"><%= each_location.location_name %>
     </option>
     <% end %>
   </select>
- </br>
-  </br>
-  Location Name: 
-  </br>  
-  <input type="text" name="name_entered" size="70" maxlength="55">
-  </br>
+  
 </br>
-  <input class="updatebutton" type="submit" value="Submit">
+</br>
+
+Location Name: 
+
+</br>  
+
+<input type="text" name="name_entered" size="70" maxlength="55">
+
+</br>
+</br>
+
+<input class="updatebutton" type="submit" value="Submit">
+
 </form>
 </p> 
 <% end %>
@@ -30,27 +38,33 @@
 <% if @location == "Update" %>
 <div id="left">
 <p>
-  Update a location:
-  <form action="/page4/update_location">
+  
+Update a location:
+<form action="/page4/update_location">
 
-  </br>
-  Current Location:
-  </br>
+</br>
+Current Location:
+</br>
+
 <select name="target_id" width="70">
-    <option> - Select Location - </option>
- <% Location.all.each do |each_location| %>
-    <option value="<%= each_location.id %>"><%= each_location.location_name %>
-    </option>
-    <% end %>
-  </select>
- </br>
-</br>
-  New Location Name:
-  </br>
-  <input type="text" name="updated_name" size="70" maxlength="55">
+  <option> - Select Location - </option>
+  <% Location.all.each do |each_location| %>
+  <option value="<%= each_location.id %>"><%= each_location.location_name %>
+  </option>
+  <% end %>
+</select>
+
 </br>
 </br>
-  <input class="updatebutton" type="submit" value="Update">
+New Location Name:
+</br>
+
+<input type="text" name="updated_name" size="70" maxlength="55">
+
+</br>
+</br>
+
+<input class="updatebutton" type="submit" value="Update">
 
 </form>
 </p>
@@ -59,26 +73,27 @@
 
 <!--Interface to delete an existing location from the database. -->
 <% if @location == "Delete" %>
-
 <p>
-  Delete a location:
-  <form action="/page4/delete_location">
-  </br>  
-<select name="delete_id" width="70">
+Delete a location:
+<form action="/page4/delete_location">
+  
+</br>  
+
+  <select name="delete_id" width="70">
     <option> - Select Location - </option>
- <% Location.all.each do |each_location| %>
+    <% Location.all.each do |each_location| %>
     <option value="<%= each_location.id %>"><%= each_location.location_name %>
     </option>
     <% end %>
   </select>
-   </br>
-  </br>
 
-    </br>  
+</br>
+</br>
+</br>  
+</br>
+</br>
 
-    </br>
-    </br>
-  <input onclick="myFunction()" class="deletebutton" type="submit" value="Delete">
+<input onclick="myFunction()" class="deletebutton" type="submit" value="Delete">
   
 </form>
 </p> 
@@ -89,17 +104,19 @@
 <% if @category == "Add" %>
 
 <p>
-  Add a category:
-  <form action="/page4/add_category">
+Add a category:
+<form action="/page4/add_category">
 
-  </br>
-  Category Name: 
-  </br>  
-  <input type="text" name="name_entered" size="70" maxlength="55">
-  </br>
-  </br>
+</br>
+Category Name: 
+</br> 
+ 
+<input type="text" name="name_entered" size="70" maxlength="55">
 
-  <input class="updatebutton" type="submit" value="Submit">
+</br>
+</br>
+
+<input class="updatebutton" type="submit" value="Submit">
 </form>
 </p> 
 <% end %>
@@ -109,27 +126,32 @@
 
 <div id="left">
 <p>
-  Update a category:
-  <form action="/page4/update_category">
+Update a category:
+<form action="/page4/update_category">
 
-  </br>
-  Current Category:
-  </br>
-<select name="target_id" width="70">
+</br>
+Current Category:
+</br>
+
+  <select name="target_id" width="70">
     <option> - Select Category - </option>
- <% Category.all.each do |each_category| %>
+    <% Category.all.each do |each_category| %>
     <option value="<%= each_category.id %>"><%= each_category.manufacturer %>
     </option>
     <% end %>
   </select>
- </br>
-</br>
-  New Category Name:
-  </br>
-  <input type="text" name="updated_name" size="70" maxlength="55">
+
 </br>
 </br>
-  <input class="updatebutton" type="submit" value="Update">
+New Category Name:
+</br>
+
+<input type="text" name="updated_name" size="70" maxlength="55">
+
+</br>
+</br>
+
+<input class="updatebutton" type="submit" value="Update">
 
 </form>
 </p>
@@ -139,31 +161,30 @@
 <!--Interface to delete an existing category from the database -->
 
 <% if @category == "Delete" %>
-
 <p>
-  Delete a category:
-  <form action="/page4/delete_category">
+Delete a category:
+<form action="/page4/delete_category">
 
-  </br>
-  Current Category:
-  </br>
-<select name="delete_id" width="70">
+</br>
+Current Category:
+</br>
+
+  <select name="delete_id" width="70">
     <option> - Select Category - </option>
- <% Category.all.each do |each_category| %>
+    <% Category.all.each do |each_category| %>
     <option value="<%= each_category.id %>"><%= each_category.manufacturer %>
     </option>
     <% end %>
   </select>
- </br>
+
+</br>
+</br>
+</br>  
+</br>
 </br>
 
-  </br>  
 
-  </br>
-  </br>
-
-
-  <input class="deletebutton" type="submit" value="Delete">
+<input class="deletebutton" type="submit" value="Delete">
 </form>
 </p> 
 <% end %>
@@ -171,48 +192,54 @@
 <!--Interface to add a new product to the database -->
 <% if @product == "Add" %>
 <p>
-  Add a Product
-  <form action="/page4/add_product">
-  <h2>Product Name: </h2>
+Add a Product
+<form action="/page4/add_product">
+<h2>Product Name: </h2>
 
-  <input type="text" name="name_entered" size="70" maxlength="55">
-  </br>
-  <h2>Location: </h2> 
-<select name="location_id" width="70">
+<input type="text" name="name_entered" size="70" maxlength="55">
+
+</br>
+<h2>Location: </h2> 
+
+  <select name="location_id" width="70">
     <option> - Select Location - </option>
- <% Location.all.each do |each_location| %>
+    <% Location.all.each do |each_location| %>
     <option value="<%= each_location.id %>"><%= each_location.location_name %>
     </option>
     <% end %>
   </select>
-  </br>
-    <h2>Category:</h2> 
-<select name="category_id" width="70">
+
+</br>
+
+<h2>Category:</h2> 
+
+  <select name="category_id" width="70">
     <option> - Select Category - </option>
- <% Category.all.each do |each_category| %>
+    <% Category.all.each do |each_category| %>
     <option value="<%= each_category.id %>"><%= each_category.manufacturer %>
     </option>
     <% end %>
   </select>
 
-    <h2>Description: </h2>
+  <h2>Description: </h2>
 
-    <input type="text" name="description" size="70" maxlength="55">
+  <input type="text" name="description" size="70" maxlength="55">
 
-    <h2>Cost (in whole dollars): </h2>
+  <h2>Cost (in whole dollars): </h2>
 
-    <input type="text" name="cost" size="70" maxlength="55">
+  <input type="text" name="cost" size="70" maxlength="55">
  
-    <h2>Serial # </h2>
+  <h2>Serial # </h2>
 
-    <input type="text" name="serial" size="70" maxlength="55">
+  <input type="text" name="serial" size="70" maxlength="55">
 
-    <h2>Quantity(no commas): </h2>
+  <h2>Quantity(no commas): </h2>
 
-    <input type="text" name="quantity" size="70" maxlength="10">
-    </br>
-  
-</br>
+  <input type="text" name="quantity" size="70" maxlength="10">
+
+  </br> 
+  </br>
+
   <input class="updatebutton" type="submit" value="Submit">
 </form>
 </p> 
@@ -220,33 +247,37 @@
 
 <!--Interface to update an existing product in the database -->
 <% if @product == "Update" %>
-
 <div id="left">
-<p>
-  Update a Product:
-  <form action="/page4/update_product">
+   <p>
+     Update a Product:
+     <form action="/page4/update_product">
 
-  </br>
-  Current Product:
-  </br>
-<select name="target_id" width="70">
-    <option> - Select Category - </option>
- <% Product.all.each do |each_product| %>
-    <option value="<%= each_product.id %>"><%= each_product.name %>
-    </option>
-    <% end %>
-  </select>
- </br>
-</br>
-  New Product Name:
-  </br>
-  <input type="text" name="updated_name" size="70" maxlength="55">
-</br>
-</br>
-  <input class="updatebutton" type="submit" value="Update">
+      </br>
+      Current Product:
+    </br>
 
-</form>
-</p>
+    <select name="target_id" width="70">
+      <option> - Select Category - </option>
+      <% Product.all.each do |each_product| %>
+      <option value="<%= each_product.id %>"><%= each_product.name %>
+      </option>
+      <% end %>
+    </select>
+
+    </br>
+    </br>
+    New Product Name:
+    </br>
+    
+    <input type="text" name="updated_name" size="70" maxlength="55">
+
+    </br>
+    </br>
+
+    <input class="updatebutton" type="submit" value="Update">
+
+  </form>
+  </p>
 </div>
 <% end %>
 
@@ -259,24 +290,24 @@
 
   </br>
   Current Product:
-  </br>
-<select name="delete_id" width="70">
-    <option> - Select Category - </option>
- <% Product.all.each do |each_product| %>
-    <option value="<%= each_product.id %>"><%= each_product.name %>
-    </option>
-    <% end %>
-  </select>
- </br>
 </br>
 
-  </br>  
+<select name="delete_id" width="70">
+  <option> - Select Category - </option>
+  <% Product.all.each do |each_product| %>
+  <option value="<%= each_product.id %>"><%= each_product.name %>
+  </option>
+  <% end %>
+</select>
 
-  </br>
-  </br>
+</br>
+</br>
+</br>  
+</br>
+</br>
 
 
-  <input class="deletebutton" type="submit" value="Delete">
+<input class="deletebutton" type="submit" value="Delete">
 </form>
 </p> 
 <% end %>
@@ -289,46 +320,53 @@
 <% if @product == "Move" %>
 
 <p>
-  Move a Product:
-  <form action="/page4/move_product">
+Move a Product:
+<form action="/page4/move_product">
 
-  </br>
-  Current Product:
 </br>
+Current Product:
+</br>
+
 <select name="move_id" width="70">
-    <option> - Select Product - </option>
- <% Product.all.each do |each_product| %>
-    <option value="<%= each_product.id %>"><%= each_product.name %>
-    </option>
-    <% end %>
-  </select>
- </br>
+  <option> - Select Product - </option>
+  <% Product.all.each do |each_product| %>
+  <option value="<%= each_product.id %>"><%= each_product.name %>
+  </option>
+  <% end %>
+</select>
+
 </br>
- Choose A Location: 
 </br>
+Choose A Location: 
+</br>
+
 <select name="location_id" width="70">
-    <option> - Select Location - </option>
- <% Location.all.each do |each_location| %>
-    <option value="<%= each_location.id %>"><%= each_location.location_name %>
-    </option>
-    <% end %>
-  </select>
+  <option> - Select Location - </option>
+  <% Location.all.each do |each_location| %>
+  <option value="<%= each_location.id %>"><%= each_location.location_name %>
+  </option>
+  <% end %>
+</select>
+
 </br>
 </br>
-  Choose A Category:
+Choose A Category:
 </br>
+
 <select name="category_id" width="70">
-    <option> - Select Category - </option>
- <% Category.all.each do |each_category| %>
-    <option value="<%= each_category.id %>"><%= each_category.manufacturer %>
-    </option>
-    <% end %>
-  </select>
-  </br>
-  </br>
+  <option> - Select Category - </option>
+  <% Category.all.each do |each_category| %>
+  <option value="<%= each_category.id %>"><%= each_category.manufacturer %>
+  </option>
+  <% end %>
+</select>
 
+</br>
+</br>
 
-  <input class="deletebutton" type="submit" value="MOVE">
+<input class="deletebutton" type="submit" value="MOVE">
+
 </form>
+
 </p> 
 <% end %>

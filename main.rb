@@ -22,16 +22,6 @@ require_relative "product"
 #   #use before filters to do things like validate if a user is logged in before loading the route file
 # end
 
-get "/page4/move_product" do
-  @move_id = params["move_id"]
-  @location_id = params["location_id"]
-  @category_id = params["category_id"]
-  @move_it = Product.new({"id" => @move_id.to_i, "location_id" => @location_id.to_i,
-  "category_id" => @category_id.to_i})
-  @move_it.move_it
-  erb :move_product, :layout => :template
-end
-
 get "/page1" do
   erb :page1, :layout => :template #find the erb file in views/welcome.erb and return it
 end
@@ -119,6 +109,16 @@ get "/page4/update_product" do
   @update_it = Product.new({"id" => "#{@update_id}", "name" => "#{@update_name}"})
   @update_it.overwrite
   erb :update_product, :layout => :template
+end
+
+get "/page4/move_product" do
+  @move_id = params["move_id"]
+  @location_id = params["location_id"]
+  @category_id = params["category_id"]
+  @move_it = Product.new({"id" => @move_id.to_i, "location_id" => @location_id.to_i,
+  "category_id" => @category_id.to_i})
+  @move_it.move_it
+  erb :move_product, :layout => :template
 end
 
 get "/page4/delete_product" do
