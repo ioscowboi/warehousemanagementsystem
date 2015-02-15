@@ -13,9 +13,9 @@ require_relative 'database_setup.rb'
 # Here, we load category, location and product files so we don't need to in 
 # every file
 
-require_relative "category"
-require_relative "location"
-require_relative "product"
+require_relative "models/category"
+require_relative "models/location"
+require_relative "models/product"
 
 # before "/first_page" do
 #   @update_welcome = "and I'm using before filters!"
