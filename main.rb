@@ -23,11 +23,11 @@ require_relative "product"
 # end
 
 get "/page4/move_product" do
-  @move_id = "#{params["move_id"]}"
-  @location_id = "#{params["location_id"]}"
-  @category_id = "#{params["category_id"]}"
-  @move_it = Product.new({"id" => "#{@move_id}", "location_id" => "#{@location_id}",
-  "category_id" => "#{@category_id}"})
+  @move_id = params["move_id"]
+  @location_id = params["location_id"]
+  @category_id = params["category_id"]
+  @move_it = Product.new({"id" => @move_id.to_i, "location_id" => @location_id.to_i,
+  "category_id" => @category_id.to_i})
   @move_it.move_it
   erb :move_product, :layout => :template
 end
