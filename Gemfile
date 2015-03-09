@@ -1,0 +1,5 @@
+source 'https://rubygems.org'
+gem 'sqlite3'
+gem 'pry'
+gem 'rspec'
+gem 'sinatra', '~>1.4.5'
