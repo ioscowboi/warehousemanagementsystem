@@ -2,14 +2,17 @@ require 'sinatra'
 require 'pry'
 # To initialize and enable our program to run SQLITE3 : 
 require 'sqlite3'
+require 'sinatra/activerecord'
 
 # Here, we create the actual database if it's not created yet.
 # Otherwise, it will simply load the existing database: 
 # ex: DATABASENAME = DATABASEINTERPRETERNAME::Databaseobjectname.new('yourdesired_database_name')
 
 DATABASE = SQLite3::Database.new('warehousemanager.db')
-
 require_relative 'database_setup.rb'
+
+
+set :database, {adapter: "sqlite3", database: "warehousemanager.db"}
 # Here, we load category, location and product files so we don't need to in 
 # every file
 
@@ -58,30 +61,28 @@ end
 
 get "/page4/delete_location" do
   @delete_id = "#{params["delete_id"]}"
-  @delete_it = Location.new({"id" => "#{@delete_id}"})
-  @delete_it.remove
+  Location.delete(@delete_id)
   erb :delete_location, :layout => :template
 end
 
 get "/page4/add_category" do
   @new_name = "#{params["name_entered"]}"
-  @add_it = Category.new({"manufacturer" => "#{@new_name}"})
-  @add_it.insert
+  @add_it = Category.create(manufacturer: "#{@new_name}")
   erb :add_category, :layout => :template
 end
 
 get "/page4/update_category" do
   @update_id = "#{params["target_id"]}"
   @update_name = "#{params["updated_name"]}"
-  @update_it = Category.new({"id" => "#{@update_id}", "manufacturer" => "#{@update_name}"})
-  @update_it.overwrite
+  @update_it = Category.where(id: @update_id)
+  @update_it = @update_it[0]
+  @update_it.manufacturer = '#{@update_it.manufacturer}'
   erb :update_category, :layout => :template
 end
 
 get "/page4/delete_category" do
   @delete_id = "#{params["delete_id"]}"
-  @delete_it = Category.new({"id" => "#{@delete_id}"})
-  @delete_it.remove
+  Category.delete(@delete_id)
   erb :delete_category, :layout => :template
 end
 

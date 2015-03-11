@@ -7,14 +7,14 @@
 #
 # Methods:
 # #insert, #save, #delete
-class Category
-  attr_reader :id
-  attr_accessor :manufacturer
-  
-  def initialize(options)
-    @manufacturer = options["manufacturer"]
-    @id = options["id"]
-  end
+class Category < ActiveRecord::Base
+  # attr_reader :id
+  # attr_accessor :manufacturer
+  #
+  # def initialize(options)
+  #   @manufacturer = options["manufacturer"]
+  #   @id = options["id"]
+  # end
   
   # Public: #insert
   # Adds the category name to the 'categories' table as a new record and 
@@ -29,11 +29,11 @@ class Category
   # State Changes:
   # Inserts values into 'categories' table in the database as a new category
   # record.
-  def insert
-    DATABASE.execute("INSERT INTO categories (manufacturer) 
-                      VALUES ('#{@manufacturer}')")
-    @id = DATABASE.last_insert_row_id
-  end
+  # def insert
+  #   DATABASE.execute("INSERT INTO categories (manufacturer)
+  #                     VALUES ('#{@manufacturer}')")
+  #   @id = DATABASE.last_insert_row_id
+  # end
 
   # Public: #save
   # Updates the category name in the 'categories' table.
@@ -48,30 +48,30 @@ class Category
   # State Changes:
   # Saves new value in 'categories' table in the database.
   
-  def save
-    get_category = []
-
-    instance_variables.each do |x|
-      get_category << x.to_s.delete("@")
-  
-    end
-    
-    category_grabber = []
-    
-    get_category.each do |y|
-      local_var = self.send(y)
-    
-      if local_var.is_a?(Integer)
-        category_grabber << "#{y} = #{local_var}"  
-      else
-        category_grabber << "#{y} = '#{local_var}'"
-      end
-    end
-    
-    var = category_grabber.join(", ")
-    
-    DATABASE.execute("UPDATE categories SET #{var} WHERE id = #{id}")
-  end
+  # def save
+  #   get_category = []
+  #
+  #   instance_variables.each do |x|
+  #     get_category << x.to_s.delete("@")
+  #
+  #   end
+  #
+  #   category_grabber = []
+  #
+  #   get_category.each do |y|
+  #     local_var = self.send(y)
+  #
+  #     if local_var.is_a?(Integer)
+  #       category_grabber << "#{y} = #{local_var}"
+  #     else
+  #       category_grabber << "#{y} = '#{local_var}'"
+  #     end
+  #   end
+  #
+  #   var = category_grabber.join(", ")
+  #
+  #   DATABASE.execute("UPDATE categories SET #{var} WHERE id = #{id}")
+  # end
   
   # Public: #overwrite
   # changes the row values of an existing column (SELECT parameters:@name)
@@ -87,10 +87,10 @@ class Category
   # Sets database values to new info based on user input
   # database fields affected: manufacturer
   
-  def overwrite
-    DATABASE.execute("UPDATE categories SET manufacturer = '#{manufacturer}' WHERE id = #{id}")
-  end
-  
+  # def overwrite
+  #   DATABASE.execute("UPDATE categories SET manufacturer = '#{manufacturer}' WHERE id = #{id}")
+  # end
+  #
   # Public: #remove
   # Removes a row from the products table based on the selected id value
   #
@@ -104,11 +104,11 @@ class Category
   # Sets database values to new info based on user input
   # database fields affected: 1 row
   
-  def remove
-
-    DATABASE.execute("DELETE FROM categories WHERE id = '#{id}'")
-  end
-  
+  # def remove
+  #
+  #   DATABASE.execute("DELETE FROM categories WHERE id = '#{id}'")
+  # end
+  #
   # Public: #delete
   # Returns the current values in the database as an array and deletes the 
   # category record.
@@ -122,30 +122,30 @@ class Category
   #
   # State Changes:
   # Removes the category record from the database.
-  def delete
-    get_category = []
-
-    instance_variables.each do |x|
-      get_category << x.to_s.delete("@")
-  
-    end
-    
-    category_grabber = []
-    
-    get_category.each do |y|
-      local_var = self.send(y)
-    
-      if local_var.is_a?(Integer)
-        category_grabber << "#{y} = #{local_var}"  
-      else
-        category_grabber << "#{y} = '#{local_var}'"
-      end
-    end
-    
-    var = category_grabber.join(", ")
-    
-    DATABASE.execute("DELETE FROM categories WHERE manufacturer = '#{manufacturer}'")
-  end
+  # def delete
+  #   get_category = []
+  #
+  #   instance_variables.each do |x|
+  #     get_category << x.to_s.delete("@")
+  #
+  #   end
+  #
+  #   category_grabber = []
+  #
+  #   get_category.each do |y|
+  #     local_var = self.send(y)
+  #
+  #     if local_var.is_a?(Integer)
+  #       category_grabber << "#{y} = #{local_var}"
+  #     else
+  #       category_grabber << "#{y} = '#{local_var}'"
+  #     end
+  #   end
+  #
+  #   var = category_grabber.join(", ")
+  #
+  #   DATABASE.execute("DELETE FROM categories WHERE manufacturer = '#{manufacturer}'")
+  # end
   
   # Public: .all
   # Class method that returns all records in the table
@@ -158,16 +158,16 @@ class Category
   #
   # State Changes:
   # None.  
-  def self.all
-    
-    results = DATABASE.execute("SELECT * FROM categories")
-    
-    results_as_objects = []
-    
-    results.each do |r|
-      results_as_objects << self.new(r)
-    end
-    
-    results_as_objects
-  end
+  # def self.all
+  #
+  #   results = DATABASE.execute("SELECT * FROM categories")
+  #
+  #   results_as_objects = []
+  #
+  #   results.each do |r|
+  #     results_as_objects << self.new(r)
+  #   end
+  #
+  #   results_as_objects
+  # end
 end
