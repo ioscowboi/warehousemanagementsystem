@@ -41,21 +41,22 @@ get "/page3" do
   @location = "#{params["option_2_locations"]}"
   @category = "#{params["option_2_categories"]}"
   @product = "#{params["option_2_products"]}"
-    erb :page3, :layout => :template
+  erb :page3, :layout => :template
 end
 
 get "/page4/add_location" do
   @new_name = "#{params["name_entered"]}"
-  @add_it = Location.new({"location_name" => "#{@new_name}"})
-  @add_it.insert
+  @add_it = Location.create(location_name: "#{@new_name}")
   erb :add_location, :layout => :template
 end
 
 get "/page4/update_location" do
   @update_id = "#{params["target_id"]}"
   @update_name = "#{params["updated_name"]}"
-  @update_it = Location.new({"id" => "#{@update_id}", "location_name" => "#{@update_name}"})
-  @update_it.overwrite
+  @update_it = Location.where(id: @update_id)
+  @update_it = @update_it[0]
+  @update_it.location_name = "#{@update_name}"
+  @update_it.save
   erb :update_location, :layout => :template
 end
 
@@ -76,7 +77,8 @@ get "/page4/update_category" do
   @update_name = "#{params["updated_name"]}"
   @update_it = Category.where(id: @update_id)
   @update_it = @update_it[0]
-  @update_it.manufacturer = '#{@update_it.manufacturer}'
+  @update_it.manufacturer = "#{@update_name}"
+  @update_it.save
   erb :update_category, :layout => :template
 end
 
@@ -94,10 +96,9 @@ get "/page4/add_product" do
   @serial = "#{params["serial"]}"
   @location_id = "#{params["location_id"]}"
   @category_id = "#{params["category_id"]}"
-  @add_it = Product.new({"name" => "#{@new_name}", "location_id" => "#{@location_id}",
-  "category_id" => "#{@category_id}", "quantity" => "#{@quantity}", "description" => "#{@description}",
-  "cost" => "#{@cost}", "serial" => "#{@serial}"})
-  @add_it.insert
+  @add_it = Product.create(name: "#{@new_name}", location_id: @location_id,
+  category_id: @category_id, quantity: "#{@quantity}", description: "#{@description}",
+  cost: "#{@cost}", serial: "#{@serial}")
   erb :add_product, :layout => :template
 end
 
@@ -107,25 +108,26 @@ get "/page4/update_product" do
   @location_id = "#{params["location_id"]}"
   @category_id = "#{params["category_id"]}"
   @serial = "#{params["serial"]}"
-  @update_it = Product.new({"id" => "#{@update_id}", "name" => "#{@update_name}"})
-  @update_it.overwrite
+  @update_it = Product.where(id: @update_id)
+  @update_it = @update_it[0]
+  @update_it.name = "#{@update_name}"
+  @update_it.save
   erb :update_product, :layout => :template
 end
 
 get "/page4/move_product" do
   @move_id = params["move_id"]
-  @location_id = params["location_id"]
-  @category_id = params["category_id"]
-  @move_it = Product.new({"id" => @move_id.to_i, "location_id" => @location_id.to_i,
-  "category_id" => @category_id.to_i})
-  @move_it.move_it
+  @change = Product.where(id: @move_id)
+  @change = @change[0]
+  @change.location_id = params["location_id"]
+  @change.category_id = params["category_id"]
+  @change.save
   erb :move_product, :layout => :template
 end
 
 get "/page4/delete_product" do
   @delete_id = "#{params["delete_id"]}"
-  @delete_it = Product.new({"id" => "#{@delete_id}"})
-  @delete_it.remove
+  @delete_it = Product.delete(@delete_id)
   erb :delete_product, :layout => :template
 end
 
