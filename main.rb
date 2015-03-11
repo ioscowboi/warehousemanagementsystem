@@ -25,7 +25,7 @@ require_relative "models/product"
 #   #use before filters to do things like validate if a user is logged in before loading the route file
 # end
 
-get "/page1" do
+get "/" do
   erb :page1, :layout => :template #find the erb file in views/welcome.erb and return it
 end
 
